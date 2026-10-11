@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "datasetVersion": "0.1.0",
+  "datasetVersion": "0.1.1",
   "profile": { "sensitivity": "conservative", "flagAiLikePhrasing": false },
   "cases": [
     {
@@ -79,8 +79,8 @@
     },
     {
       "id": "dev-012", "split": "development", "family": "ordinary-offer", "tags": ["closing_offer", "hard_negative"], "source": "synthetic",
-      "text": "I wrote a detailed explanation of how I repaired the hinge. Let me know if you'd like a shorter version!",
-      "expectedFindings": [], "rationale": "The author may legitimately offer a shorter explanation to readers; there is no clear drafting wrapper."
+      "text": "I posted my full hinge repair guide in yesterday's thread. It's about six pages because several people asked for measurements and photos. Let me know if you'd like a shorter version!",
+      "expectedFindings": [], "rationale": "The reference to an existing guide and readers' requests gives the author's offer a natural purpose. The original, less contextual version is preserved in review-cases.json without a scored label."
     },
     {
       "id": "dev-013", "split": "development", "family": "event-placeholder", "tags": ["intentional_template", "hard_negative"], "source": "synthetic",

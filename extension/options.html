@@ -1,6 +1,19 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><title>Proofreader foundation settings</title><link rel="stylesheet" href="styles.css"></head><body>
-<h1>Proofreader foundation</h1>
-<p class="note">Detection is not connected yet. This build makes no model requests and shows no warnings on Reddit.</p>
+<h1>Proofreader settings</h1>
+<p class="note">Development build: eligible Reddit pastes can display a quiet notice with exact excerpts and Dismiss. Test the sample below before trying a draft.</p>
+<h2>Detection provider</h2>
+<p>Default: limited basic checks for standalone explicit placeholders. Contextual detection uses GPT-6 Luna at api.openai.com.</p>
+<label><input id="cloud" type="checkbox"> Send the full affected input to OpenAI automatically after a paste on enabled sites. API usage is billed to my account.</label>
+<button id="provider-save" type="button">Apply cloud setting</button>
+<p class="note">Cloud stays off until you enable it and grant browser permission. Requests use store:false; this does not guarantee zero provider retention.</p>
+<label>OpenAI API key (this browser session only)<input id="api-key" type="password" autocomplete="off" spellcheck="false"></label>
+<button id="key-save" type="button">Use key for this session</button> <button id="key-forget" type="button">Forget key</button>
+<p class="note">The key is not synced or saved to disk by this extension. Re-enter it after browser restart or extension reload. Your PowerShell credential is separate.</p>
+<output id="provider-status" role="status"></output>
+<button id="connection" type="button">Test connection (paid request)</button> <button id="sample" type="button">Test sample (paid request)</button>
+<p>Sample: “Here is a version you can post. The meeting starts at noon. Let me know if you would like a shorter version.”</p>
+<output id="sample-result" role="status"></output>
+<h2>Site and input settings</h2>
 <form id="settings">
 <label><input id="enabled" type="checkbox"> Enabled</label>
 <label>Site mode<select id="mode"><option value="allow">Only listed domains</option><option value="block">All permitted sites except listed domains</option></select></label>
@@ -10,4 +23,9 @@
 <label>Maximum characters per check (blank means whole input)<input id="maximum" type="number" min="1" step="1"></label>
 <p class="note">Characters are counted as Unicode code points. Oversized inputs are skipped, never truncated.</p>
 <button type="submit">Save</button><output id="status" role="status"></output>
+<h2>Notice appearance</h2>
+<label>Theme<select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+<label>Text size<select id="textSize"><option value="small">Small</option><option value="medium">Medium</option><option value="large">Large</option></select></label>
+<label>Accent<select id="colorPreset"><option value="warm">Warm</option><option value="neutral">Neutral</option></select></label>
+<p class="note">Use Save above to apply these preferences. The local test page previews notices without API calls.</p>
 </form><p><a href="fixture.html" target="_blank">Open local editor test page</a></p><script src="options.js"></script></body></html>

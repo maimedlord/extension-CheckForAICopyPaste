@@ -1,9 +1,9 @@
 import type { Settings } from './settings';
 export interface Finding { start: number; end: number; excerpt: string; }
-export type Status = 'idle' | 'checking' | 'checked' | 'unavailable' | 'skipped' | 'error';
-export interface CheckResult { findings: Finding[]; status: 'checked' | 'unavailable'; }
+export type Status = 'idle' | 'checking' | 'checked' | 'basic' | 'unavailable' | 'skipped' | 'error';
+export interface CheckResult { findings: Finding[]; status: 'checked' | 'basic' | 'skipped' | 'unavailable'; detail?: string; usage?: {input:number;output:number}; }
 export type Checker = (text: string, signal: AbortSignal) => Promise<CheckResult>;
-// Milestone 2 deliberately has no rules or network provider.
+// Default for isolated lifecycle tests; the Reddit adapter supplies remoteChecker.
 export const unavailableChecker: Checker = async () => ({ findings: [], status: 'unavailable' });
 export function validateFindings(text: string, findings: Finding[]): Finding[] {
   let previousEnd = 0;

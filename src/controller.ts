@@ -51,11 +51,14 @@ export function mount(settings: Settings, checker: Checker = unavailableChecker,
   observer.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['disabled','readonly','contenteditable','type','autocomplete','inert','aria-disabled'] });
   return {
     update(next: Settings) {
+      const checkingChanged=settings.enabled!==next.enabled||settings.siteMode!==next.siteMode||JSON.stringify(settings.domains)!==JSON.stringify(next.domains)||settings.maxCharacters!==next.maxCharacters;
       settings = next;
+      if(!checkingChanged){for(const [editor,draft] of states)report(editor,draft);return;}
       for (const timer of timers) clearTimeout(timer);
       timers.clear();
       for (const draft of states.values()) draft.invalidate();
     },
+    invalidate(){for(const draft of states.values())draft.invalidate();},
     dispose() {
       document.removeEventListener('input', input, true); document.removeEventListener('paste', paste, true);
       observer.disconnect(); for (const timer of timers) clearTimeout(timer);

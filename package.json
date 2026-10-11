@@ -1,6 +1,6 @@
 {
   "name": "extension-checkforaicopypaste",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "description": "Alerts you if you accidentally pasted into an input field parts of an AI response you didn't intend to paste.",
   "directories": {
     "doc": "docs"

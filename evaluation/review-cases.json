@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "review-001",
+      "origin": "dev-012 in dataset 0.1.0",
+      "family": "ordinary-offer",
+      "source": "synthetic",
+      "status": "unresolved",
+      "scored": false,
+      "text": "I wrote a detailed explanation of how I repaired the hinge. Let me know if you'd like a shorter version!",
+      "reviewReason": "The closing offer sounds assistant-like, but could also be an author's legitimate offer to readers. The referenced detailed explanation is absent, leaving the intended context uncertain.",
+      "candidateInterpretations": [
+        "Stay quiet: the author may be offering a shorter version of their own repair explanation.",
+        "Flag the closing offer: it may be assistant follow-up commentary accidentally included in the input."
+      ],
+      "resolution": null
+    }
+  ]
+}

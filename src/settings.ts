@@ -4,8 +4,11 @@ export interface Settings {
   domains: string[];
   reopenAfterPaste: boolean;
   maxCharacters: number | null;
+  theme: 'system'|'light'|'dark';
+  textSize: 'small'|'medium'|'large';
+  colorPreset: 'warm'|'neutral';
 }
-export const defaults: Settings = { enabled: true, siteMode: 'allow', domains: ['reddit.com'], reopenAfterPaste: false, maxCharacters: null };
+export const defaults: Settings = { enabled: true, siteMode: 'allow', domains: ['reddit.com'], reopenAfterPaste: false, maxCharacters: null,theme:'system',textSize:'medium',colorPreset:'warm' };
 export function domain(value: string): string | null {
   const text = value.trim().toLowerCase().replace(/\.$/, '');
   if (!text || /[\s/:@*]/.test(text)) return null;
@@ -22,6 +25,9 @@ export function parseSettings(value: unknown): Settings {
     domains: Array.isArray(v.domains) ? v.domains.filter((x): x is string => typeof x === 'string').map(domain).filter((x): x is string => x !== null) : [...defaults.domains],
     reopenAfterPaste: v.reopenAfterPaste === true,
     maxCharacters: typeof v.maxCharacters === 'number' && Number.isSafeInteger(v.maxCharacters) && v.maxCharacters > 0 ? v.maxCharacters : null,
+    theme:v.theme==='light'||v.theme==='dark'?v.theme:'system',
+    textSize:v.textSize==='small'||v.textSize==='large'?v.textSize:'medium',
+    colorPreset:v.colorPreset==='neutral'?'neutral':'warm',
   };
 }
 export function allowed(host: string, settings: Settings): boolean {

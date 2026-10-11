@@ -2,6 +2,8 @@
 
 Agreed design as of October 10, 2026. This document describes intended behavior, not implemented capabilities. Implementation details requiring experiments are identified separately.
 
+For implemented capabilities and user-verified behavior as of October 11, 2026, see [DEVELOPMENT.md](DEVELOPMENT.md) and [ROADMAP.md](ROADMAP.md). The current POC supports Luna and conservative detection; local providers, sensitivity presets, and full appearance customization remain deferred or unfinished. Requirements below remain the target design.
+
 ## Purpose
 
 Catch assistant commentary, drafting instructions, and clear unfilled placeholders accidentally pasted into a message before publication. The extension is a quiet proofreader: it points out a possible mistake and leaves the user in control.

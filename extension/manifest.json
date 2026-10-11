@@ -1,8 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Check for AI Copy Paste — Development",
-  "version": "0.2.0",
-  "description": "Reddit-only extension foundation. Contextual detection is not connected yet.",
+  "version": "0.4.0",
+  "description": "Reddit proofreader POC with opt-in GPT-6 Luna checks and quiet, dismissible excerpt notices.",
+  "background": {"service_worker":"background.js"},
+  "optional_host_permissions": ["https://api.openai.com/*"],
   "permissions": ["storage"],
   "content_scripts": [{
     "matches": ["https://reddit.com/*", "https://*.reddit.com/*"],

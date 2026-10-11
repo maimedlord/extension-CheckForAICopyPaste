@@ -1,6 +1,16 @@
 # Detection evaluation set
 
-Version 0.1.0 is an authored seed dataset for the default **conservative** mode, with optional AI-like style detection **off**. It is not a measured model result or evidence of production accuracy.
+For the cloud comparison runner and private Windows key setup, see [OpenAI API setup](OPENAI_SETUP.md). Cloud calls require an explicit model and send flag. Qwen, Astra, and Luna development results are recorded in [RESULTS.md](RESULTS.md); the reserved evaluation split has not been run.
+
+Version 0.1.1 is an authored seed dataset for the default **conservative** mode, with optional AI-like style detection **off**. It is not a measured model result or evidence of production accuracy.
+
+### Label review, October 10, 2026
+
+Replaced dev-012 with a more contextual example of an author offering a shorter repair guide. Preserved its original text as unresolved `review-001` in [review-cases.json](review-cases.json). Review cases are outside both scored splits, have no expected-findings label, and must not contribute to accuracy metrics. They are development-side review material, not a fresh evaluation holdout. The scored set still has 40 cases; there is one additional unscored review case.
+
+The user agreed with the quiet labels for dev-016 (standalone prompt), dev-017 (author explaining survey questions), and dev-018 (clarification after a sign-off). Positive excerpt boundaries were accepted as a provisional baseline before model testing. No model results drove this revision.
+
+A model disagreement is evidence to inspect, not authority to overwrite labels. Review its reasoning against the input and product policy; freeze labels during a scored run, and version any later correction. At runtime, a valid contextual model finding can trigger a notice even if basic rules found nothing, but it cannot override site scope, opt-in, sensitivity, dismissal, or current-text validation.
 
 ## Contents and use
 
@@ -19,7 +29,7 @@ Run from the repository root with Node.js 22 or later; there are no packages to 
 
 ```sh
 node evaluation/validate.mjs
-node --test evaluation/validate.test.mjs
+node --test evaluation/validate.test.mjs evaluation/score.test.mjs
 ```
 
 The validator verifies metadata, split coverage, IDs, exact excerpt occurrences, source ordering, non-overlap, normalized duplicate inputs, and family separation. Its tests deliberately corrupt annotations to ensure errors are caught. It does not validate the semantic correctness of the labels.
@@ -58,7 +68,7 @@ Paste timing, draft lifecycle, permissions, dismissal, provider failure, and pop
 
 ## Model evaluation protocol (next step)
 
-No provider is called by these files. No cloud credentials or chosen local model were supplied for this milestone task, and no model performance has been measured.
+The dataset validator and scorer run offline. The separate local runner below calls the native Windows Ollama server; it does not call a cloud provider.
 
 1. Review the seed labels and choose local/cloud candidates explicitly. Validate provider support before implementing an adapter.
 2. Develop a detector prompt using only development cases. Freeze the prompt, output schema, model settings, and dataset version before evaluation.
@@ -74,4 +84,24 @@ No provider is called by these files. No cloud credentials or chosen local model
    - Input/output token usage reported by the provider and cost only when calculable from a recorded pricing source/date; use unavailable rather than zero for missing usage.
 6. Record provider, exact model/version when exposed, local runtime/quantization/hardware when applicable, prompt and adapter revisions, temperature/seed and other generation settings, timeout/retry policy, timestamp, dataset version and hash, and repository revision. Never record keys. Repeated runs are needed to assess variability.
 
-No numeric release thresholds have been selected. Compare false alarms and passage boundaries first, then the additional value of contextual analysis over limited basic checks. A future offline scorer and provider runner should test one-to-one matching, invalid outputs, partial findings, and failure accounting before reporting scores.
+No numeric release thresholds have been selected. Compare false alarms and passage boundaries first, then the additional value of contextual analysis over limited basic checks. The offline scorer tests one-to-one matching, invalid outputs, partial findings, and failure accounting.
+
+## Running the local development baseline
+
+With native Ollama running on `127.0.0.1:11435`, cloud features disabled, and `qwen3.5:9b` downloaded:
+
+```sh
+node evaluation/run-ollama.mjs
+# Optional comparison using the same output-token budget:
+node evaluation/run-ollama.mjs --think
+```
+
+Port 11435 avoids the pre-existing WSL instance on 11434 on the development machine. The runner is deliberately restricted to that localhost endpoint, the downloaded Qwen model, and the development split. It uses the revised [prompt.txt](prompt.txt), a JSON output schema, thinking disabled by default, a 16,384-token context, a 4,096-token generation cap, temperature 0, and seed 42. The original baseline used an 8,192-token context and 1,536-token generation cap; historical settings and prompts remain embedded in the immutable run records. `--think` enables a mode comparison; the cap includes thinking tokens, so this mode can exhaust its budget before producing final JSON. Such outcomes are errors, never quiet successes. These settings are experimental, not a proven optimal configuration or guaranteed determinism.
+
+Each nonempty case uses an independent request with a 120-second timeout and no retries. The empty case short-circuits without inference. A conservative 6,000-byte prompt/input guard limits this seed runner; it is not a general tokenizer or a product character limit. No input is truncated. The schema and output reserve also consume context; revisit budgeting before expanding to long inputs.
+
+Timestamped JSON files under `evaluation/results/` checkpoint every result, including errors, raw final output, exact-span scores, usage, and latency. They record model digest, runtime version, generation settings, prompt, dataset hash, source hashes, Git revision, and dirty-tree status. They intentionally store excerpts from this public seed corpus for reproducibility; do not point this development tool at private drafts or interpret it as the extension's production retention policy. Reasoning traces are not saved. Cloud cost is unavailable, not estimated from local token counts.
+
+Latency includes client wall time and initial model loading; provider/load durations are recorded separately. Do not present the first cold request as warm performance. Summaries include overlapping tag slices, so their counts must not be added together. Embedded-instruction cases can be inspected separately from everyday proofreading.
+
+The unresolved review case is not scored or automatically submitted. A model disagreement should be reviewed without changing frozen labels just to improve its score.
