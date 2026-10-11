@@ -1,8 +1,10 @@
 # Development roadmap
 
-This roadmap reflects the agreed [product design](DESIGN.md). Implementation has not begun. The earlier plan to finish a rules-only MVP before exploring models is superseded: contextual model analysis is a core capability and should be evaluated early.
+This roadmap reflects the agreed [product design](DESIGN.md). Extension implementation has not begun. The earlier plan to finish a rules-only MVP before exploring models is superseded: contextual model analysis is a core capability and should be evaluated early.
 
 ## 1. Establish the evaluation set
+
+Status: [seed dataset v0.1.0](../evaluation/README.md) contains 40 labeled cases, development/evaluation splits, an annotation policy, and executable integrity checks. Semantic label review and representative model runs remain outstanding; no model accuracy or latency results are claimed.
 
 Create labeled examples with expected exact passages and intentional no-finding cases. Include the real MS-03 drafting-commentary example, introductions, closing offers, prompts, clear placeholders, middle-of-draft leftovers, ordinary explanations, intentional AI quotations, code blocks, and ambiguous short inputs.
 
