@@ -1,6 +1,6 @@
 # Development roadmap
 
-This roadmap reflects the agreed [product design](DESIGN.md). Extension implementation has not begun. The earlier plan to finish a rules-only MVP before exploring models is superseded: contextual model analysis is a core capability and should be evaluated early.
+This roadmap reflects the agreed [product design](DESIGN.md). The milestone 2 foundation is implemented; contextual model integration and the Reddit warning UI are next. The earlier plan to finish a rules-only MVP before exploring models is superseded: contextual model analysis is a core capability and should be evaluated early.
 
 ## 1. Establish the evaluation set
 
@@ -11,6 +11,8 @@ Create labeled examples with expected exact passages and intentional no-finding 
 Test representative models before committing to a large rule system. Measure false alarms, missed findings, passage accuracy, output validity, response time, and cloud usage. Record model/configuration details. Keep separate evaluation cases from examples used to tune prompts. Quantitative release thresholds remain to be chosen from evidence, not invented in advance.
 
 ## 2. Build the extension foundation
+
+Status: implemented with automated state/DOM checks, TypeScript validation, and an esbuild Manifest V3 package. See [local build and test instructions](DEVELOPMENT.md). Manual Edge loading remains unverified. The generic editor adapter uses removal as a draft boundary; Reddit-specific rerender preservation still needs milestone 4 validation.
 
 Set up the proposed TypeScript/Manifest V3 build and a local editor test page. Establish independent input state, paste-triggered checks, outdated-result rejection, local removal of stale findings, and per-draft dismissal. Implement the shared site configuration with Reddit-only POC defaults. Exclude sensitive fields.
 

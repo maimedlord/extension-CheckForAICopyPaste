@@ -1,0 +1,10 @@
+# Local credentials must never enter version control.
+.env
+.env.*
+!.env.example
+*.dpapi
+# Cloud evaluation artifacts require deliberate review before publication.
+evaluation/results/openai-*.json
+node_modules/
+dist/
+.test-build/

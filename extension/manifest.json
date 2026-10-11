@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Check for AI Copy Paste — Development",
+  "version": "0.2.0",
+  "description": "Reddit-only extension foundation. Contextual detection is not connected yet.",
+  "permissions": ["storage"],
+  "content_scripts": [{
+    "matches": ["https://reddit.com/*", "https://*.reddit.com/*"],
+    "js": ["content.js"], "run_at": "document_idle"
+  }],
+  "action": { "default_title": "Proofreader foundation", "default_popup": "options.html" },
+  "options_page": "options.html"
+}

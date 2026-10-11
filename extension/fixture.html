@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Local editor lifecycle test</title><link rel="stylesheet" href="styles.css"></head><body>
+<h1>Local editor lifecycle test</h1>
+<p>This page uses a mock checker, not AI. Paste text containing <code>[[TEST]]</code> into an editor. Checks wait one second so you can test editing before a result arrives. No network requests or saved drafts.</p>
+<p>Type to edit: it must not start another check. Dismiss, then paste again: findings stay hidden. Clear the editor to start a new draft. Settings apply here except the domain list.</p>
+<section><label>Title<input id="title" type="text"></label><output></output><button type="button">Dismiss test findings</button></section>
+<section><label>Body<textarea id="body"></textarea></label><output></output><button type="button">Dismiss test findings</button></section>
+<section><p id="rich-label">Rich editor</p><div id="rich" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="rich-label"></div><output></output><button type="button">Dismiss test findings</button></section>
+<label>Excluded password<input type="password"></label><label>Excluded API key<input type="text" name="api_key"></label>
+<p class="note">The status displays and buttons here are test instruments, not the planned popover.</p>
+<script src="fixture.js"></script></body></html>

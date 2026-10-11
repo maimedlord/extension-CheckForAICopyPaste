@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Proofreader foundation settings</title><link rel="stylesheet" href="styles.css"></head><body>
+<h1>Proofreader foundation</h1>
+<p class="note">Detection is not connected yet. This build makes no model requests and shows no warnings on Reddit.</p>
+<form id="settings">
+<label><input id="enabled" type="checkbox"> Enabled</label>
+<label>Site mode<select id="mode"><option value="allow">Only listed domains</option><option value="block">All permitted sites except listed domains</option></select></label>
+<label>Domains, one per line<textarea id="domains" spellcheck="false"></textarea></label>
+<p class="note">Each domain includes its subdomains. This development build has browser access only to Reddit, regardless of the list.</p>
+<label><input id="reopen" type="checkbox"> Show warnings again after another paste</label>
+<label>Maximum characters per check (blank means whole input)<input id="maximum" type="number" min="1" step="1"></label>
+<p class="note">Characters are counted as Unicode code points. Oversized inputs are skipped, never truncated.</p>
+<button type="submit">Save</button><output id="status" role="status"></output>
+</form><p><a href="fixture.html" target="_blank">Open local editor test page</a></p><script src="options.js"></script></body></html>

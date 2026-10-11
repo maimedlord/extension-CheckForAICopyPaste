@@ -1,0 +1,32 @@
+{
+  "name": "extension-checkforaicopypaste",
+  "version": "0.2.0",
+  "description": "Alerts you if you accidentally pasted into an input field parts of an AI response you didn't intend to paste.",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maimedlord/extension-CheckForAICopyPaste.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maimedlord/extension-CheckForAICopyPaste/issues"
+  },
+  "homepage": "https://github.com/maimedlord/extension-CheckForAICopyPaste#readme",
+  "devDependencies": {
+    "@types/chrome": "^0.3.5",
+    "esbuild": "^0.28.2",
+    "jsdom": "^29.1.1",
+    "typescript": "^7.0.2"
+  },
+  "private": true,
+  "type": "module"
+}

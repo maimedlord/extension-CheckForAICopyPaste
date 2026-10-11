@@ -3,7 +3,9 @@ Alerts you if you accidentally pasted into an input field parts of an AI respons
 
 ## Status
 
-Design documented; the initial detection evaluation set is available. Extension implementation has not started. There is no installable extension yet.
+The milestone 2 extension foundation is implemented and can be built for local loading in Edge or Chrome. It includes Reddit-only site configuration, paste/input lifecycle handling, and a local mock-checker test page. Live detection and the warning popover are not connected yet.
+
+See [build instructions and Edge testing](docs/DEVELOPMENT.md). Run `npm ci`, `npm run build`, then load the generated `dist` folder as an unpacked extension.
 
 The planned extension acts as a quiet proofreader: after a paste, it checks the full text of that input and displays possible leftovers in an anchored, non-modal popover. The user edits the original field; the popover offers only Dismiss.
 
